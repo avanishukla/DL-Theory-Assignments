@@ -1,0 +1,1425 @@
+\documentclass[solution,addpoints,12pt]{exam}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{animate}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{commath}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newenvironment{Solution}{\begin{solution}}{\end{solution}}
+
+\printanswers
+%\unframedsolutions
+\pagestyle{headandfoot}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% INSTRUCTIONS %%%%%%%%%%%%%%%%%%%%%
+% * Fill in your name and roll number below
+
+% * Answer in place (after each question)
+
+% * Use \begin{solution} and \end{solution} to typeset
+%   your answers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Fill in the details below
+\def\studentName{\textbf{Avani Shukla}}
+\def\studentRoll{\textbf{CS18M052}}
+
+\firstpageheader{CS 7015 - Deep Learning - Assignment 2}{}{\studentName, \studentRoll}
+\firstpageheadrule
+
+\newcommand{\brac}[1]{\left[ #1 \right]}
+\newcommand{\curly}[1]{\left\{ #1 \right\}}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert}
+
+\allowdisplaybreaks
+\begin{document}
+Instructions:
+\begin{itemize}
+    \itemsep0em
+    \item This assignment is meant to help you grok certain concepts we will use in the course. Please don't copy solutions from any sources.
+    \item Avoid verbosity.
+    \item Questions marked with * are relatively difficult. Don't be discouraged if you cannot solve them right away!
+    \item The assignment needs to be written in latex using the attached tex file. The solution for each question should be written in the solution block in space already provided in the tex file. \textbf{Handwritten assignments will not be accepted.}
+\end{itemize}
+
+\noindent\rule{\textwidth}{1pt}
+
+\begin{questions}
+
+\question Suppose, a transformation matrix A, transforms the standard basis vectors of $R^3$ as follows : \\
+\\
+$\begin{bmatrix}
+    1  \\
+    0 \\
+    0
+ \end{bmatrix}$
+ $=>$
+$\begin{bmatrix}
+    3  \\
+    8 \\
+    0
+ \end{bmatrix}
+ ;
+ \begin{bmatrix}
+    0  \\
+    1 \\
+    0
+ \end{bmatrix}
+ =>
+\begin{bmatrix}
+    -4  \\
+    9 \\
+    7
+ \end{bmatrix}
+;
+\begin{bmatrix}
+    0  \\
+    0 \\
+    1
+ \end{bmatrix}
+ =>
+\begin{bmatrix}
+    -1  \\
+    2 \\
+    6
+ \end{bmatrix}
+\\$
+\begin{parts}
+\part If the volume of a hypothetical parallelepiped in the un-transformed space is $100 units^3$ what will be volume of this parallelepiped in the transformed space? 
+\begin{Solution}
+Let, a,b,c are transformed basis vectors.\\
+Volume of the parallelepiped spanned by transformed basis vectors is: 
+\begin{align*}
+&=\left |(a \times b)\cdot c \right |*100\,units^3\\
+&=\left | 
+det\left (
+\begin{bmatrix} 
+3 & -4 & -1 \\
+8 & 9 & 2\\
+0 & 7 & 6
+\end{bmatrix} \right)
+ \right | * 100\,units^3 \\
+ &= \left |(3(9*6-7*2)-8(-4*6+7)) \right |* 100\,units^3\\
+ &= 25600\,units^3
+\end{align*}
+\end{Solution}
+
+\part What will be the volume if the transformation of the basis vectors is as follows :\\ 
+\\
+$\begin{bmatrix}
+    1  \\
+    0 \\
+    0
+ \end{bmatrix}
+ =>
+\begin{bmatrix}
+    1  \\
+    1 \\
+    3
+ \end{bmatrix}
+ ;
+ \begin{bmatrix}
+    0  \\
+    1 \\
+    0
+ \end{bmatrix}
+ =>
+\begin{bmatrix}
+    -1  \\
+    2\\
+    0
+ \end{bmatrix}
+;
+\begin{bmatrix}
+    0  \\
+    0 \\
+    1
+ \end{bmatrix}
+ =>
+\begin{bmatrix}
+    0  \\
+    2 \\
+    2
+ \end{bmatrix}$
+\\
+\begin{Solution}
+Let, a,b,c are transformed basis vectors.\\
+Volume spanned by transformed basis vectors is: 
+\begin{align*}
+&=\left |(a \times b)\cdot c \right |*100\,units^3\\
+&=\left | 
+det\left (
+\begin{bmatrix} 
+1 & -1 & 0 \\
+1 & 2 & 2\\
+3 & 0 & 2
+\end{bmatrix} \right)
+ \right |*100\,units^3\\
+ &= \left |1(2*2)-(-1)(2-3*2)\right |*100\,units^3\\
+ &= 0 *100\,units^3\\
+ &= 0 \,units^3
+\end{align*}
+\end{Solution}
+
+\part Comment on the uniqueness of the second transformation.
+\begin{Solution}
+In the second transformation, given three basis vectors $v_1, v_2, v_3$ are not linearly independent.
+\[\lambda_1v_1 + \lambda_2v_2 + \lambda_3 v_3 = 0\]
+
+\[\therefore \lambda_1 = \frac{-2}{3},\lambda_2 = \frac{-2}{3},\lambda_3 = 1\]
+is non-zero solution of the given equation.\\
+
+There are two independent vectors. And vectors span parallelogram in two-dimensional plane. So, the volume of the parallelepiped is zero.
+\end{Solution}
+\end{parts}
+
+\question
+If $R^3$ is represented by following basis vectors :
+ $\begin{bmatrix}
+    5 \\
+    2 \\
+    0
+ \end{bmatrix}$ 
+,
+$\begin{bmatrix}
+    8  \\
+    7 \\
+    -11
+ \end{bmatrix}$ 
+,
+$\begin{bmatrix}
+    -4  \\
+    -9 \\
+    3
+ \end{bmatrix}$ 
+
+\begin{parts}
+\part Find the representation of the vector 
+$\begin{pmatrix}
+    -3  &
+    1 &
+    -2
+ \end{pmatrix}^T$ 
+ (as represented in standard basis) in the above basis. 
+ \begin{Solution}
+The vector 
+$ e = \begin{pmatrix}
+    -3  &
+    1 &
+    -2
+ \end{pmatrix}^T$ in the form of given basis vectors $v_1$,$v_2$ and $v_3$ can be found as :
+ \begin{align*}
+     b_1v_1 + b_2v_2 &+ b_3v_3 = e\\
+     Ab &= e\\
+     \therefore b &= A^{-1}e\\
+     \intertext{where, $A$ is matrix whose columns are basis vector $v_1$,$v_2$ and $v_3$. $b$ is vector represented in given basis and $e$ is vector represented in standard basis}
+    \intertext{Matrix A is $\begin{bmatrix}
+    5 & 8 & -4\\
+    2 & 7 & -9\\
+    0 & -11 & 3
+    \end{bmatrix}$.}
+    \therefore b &= \begin{bmatrix}
+    5 & 8 & -4\\
+    2 & 7 & -9\\
+    0 & -11 & 3
+    \end{bmatrix}^{-1}
+    \begin{bmatrix}
+    -3 \\
+    1 \\
+    -2 
+    \end{bmatrix}\\
+    &= \frac{-1}{350}\begin{bmatrix}
+    -78 & 20 & -44\\
+    -6 & 15 & 37\\
+    -22 & 55 & 19
+    \end{bmatrix}
+    \begin{bmatrix}
+    -3 \\
+    1 \\
+    -2 
+    \end{bmatrix}\\
+    &= \begin{bmatrix}
+    -\frac{171}{175} \\
+    \frac{41}{350} \\
+    -\frac{83}{350} 
+    \end{bmatrix}
+ \end{align*}
+\end{Solution}
+\part We know that, orthonormal basis simplifies this transformation to a great extent. What would be the representation of vector 
+$\begin{pmatrix}
+    -3  &
+    1 &
+    -2
+ \end{pmatrix}^T$ 
+ in the orthogonal basis represented by :
+$\begin{bmatrix}
+    1  \\
+    -1 \\
+    0
+ \end{bmatrix}$ 
+,
+$\begin{bmatrix}
+    1  \\
+    1 \\
+    0
+ \end{bmatrix}$ 
+,
+$\begin{bmatrix}
+    0  \\
+    0 \\
+    1
+ \end{bmatrix}$ .
+ \begin{Solution}
+The vector 
+$ e = \begin{pmatrix}
+    -3  &
+    1 &
+    -2
+ \end{pmatrix}^T$ in the form of given orthogonal basis vectors $v_1$,$v_2$ and $v_3$ can be found by :\\
+ \begin{align*}
+     b_1v_1 + b_2v_2 + b_3v_3 = e\hspace*{20mm}(1)
+ \end{align*}
+ vector $ b = \begin{pmatrix}
+    b_1  &
+    b_2 &
+    b_3
+ \end{pmatrix}^T$ is vector in the form of given orthogonal basis.\\
+     Since, vectors $v_1$,$v_2$ and $v_3$ are orthogonal,
+     \[\langle v_i,v_j \rangle = 0, \,if\, i\neq j\]
+    Do dot product with $v_1$ both sides of the equation 1,
+     \[b_1 \langle v_1,v_1 \rangle  + b_2 \langle v_1,v_2 \rangle + b_3 \langle v_1,v_3 \rangle = \langle e,v_1 \rangle\]
+ \begin{align*}
+    b_1  &= \frac{\langle e,v_1 \rangle}{\langle v_1,v_1 \rangle}\\
+     &= \frac{\begin{bmatrix}
+    -3  &
+    1 &
+    -2
+ \end{bmatrix}\begin{bmatrix}
+    1  \\
+    -1 \\
+    0
+ \end{bmatrix}}{\begin{bmatrix}
+    1  &
+    -1 &
+    0
+ \end{bmatrix}\begin{bmatrix}
+    1  \\
+    -1 \\
+    0
+ \end{bmatrix}} \\
+     &= \frac{-3-1}{1+1}
+     = -2
+     \intertext{Do dot product with $v_2$ both sides of the equation 1, we will get}
+    b_2  &= \frac{\langle e,v_2 \rangle}{\langle v_2,v_2 \rangle}\\
+     &= \frac{\begin{bmatrix}
+    -3  &
+    1 &
+    -2
+ \end{bmatrix}\begin{bmatrix}
+    1  \\
+    1 \\
+    0
+ \end{bmatrix}}{\begin{bmatrix}
+    1  &
+    1 &
+    0
+ \end{bmatrix}\begin{bmatrix}
+    1  \\
+    1 \\
+    0
+ \end{bmatrix}} \\
+     &= \frac{-3+1}{1+1}
+     = -1
+     \intertext{Do dot product with $v_2$ both sides of the equation 1, we will get}
+    b_2  &= \frac{\langle e,v_2 \rangle}{\langle v_2,v_2 \rangle}\\
+     &= \frac{\begin{bmatrix}
+    -3  &
+    1 &
+    -2
+ \end{bmatrix}\begin{bmatrix}
+    0  \\
+    0 \\
+    1
+ \end{bmatrix}}{\begin{bmatrix}
+    0  &
+    0 &
+    1
+ \end{bmatrix}\begin{bmatrix}
+    0  \\
+    0 \\
+    1
+ \end{bmatrix}} \\
+     &= \frac{-2}{1}
+     = -2
+ \end{align*}
+ vector $ b = \begin{pmatrix}
+    -2  &
+    -1 &
+    -2
+ \end{pmatrix}^T$ is vector in the form of given orthogonal basis.
+\end{Solution}
+\part Comment on the advantages of having orthonormal basis.
+\begin{Solution}
+If orthonormal basis $B = \{v_1,v_2,\cdots,v_n\}$ is given then the unique coordinate representation of a vector $w$ with respect to $B$ is  vector $ b = \begin{pmatrix}
+    b_1  &
+    b_2 &
+    b_3
+ \end{pmatrix}^T$ given by:
+\[\langle w,v_1 \rangle v_1 + \langle w,v_2 \rangle v_2 +\cdots+ \langle w,v_n \rangle v_n = w\]
+(we can generalize this equation from question solution of part(b))\\
+Where, $b_1 = \langle w,v_1 \rangle$, $b_2 = \langle w,v_2 \rangle$ and so on.\\
+
+If basis are not orthonormal then to derive the coordinate representation of a vector, we have to compute the inverse or solve the system of linear equation which has time complexity $O(n^3)$. \\
+
+But if basis are orthonormal then we can derive the coordinate representation of a vector by simple dot product of vectors or by transpose of matrix since for orthonormal matrix $A^{-1}=A^T$ which has time complexity $O(n^2)$.\\
+
+Hence orthonormal basis makes computation easy.
+\end{Solution}
+\end{parts}
+
+
+\question A square matrix is a Markov matrix if each entry is between zero and one and the sum along each row is one. Prove that a product of Markov matrices is Markov.
+\begin{Solution}
+A square markov matrix has each entry between zero and one and the sum along each row is one. \\
+Let, $A=[a_{ij}]$ be an $n \times n$ markov matrix. vector $e =\begin{pmatrix}
+    1  &
+    1 &
+    \cdots &
+    1
+ \end{pmatrix}^T$ of size $n$ whose all elements are equal to 1.\\
+    we know that,
+\[ \sum_{j=1}^{n} a_{ij} = 1 \hspace*{10mm}for\hspace*{1mm}i= 1 \cdots n\]
+\[\therefore Ae = e\]
+$B=[b_{ij}]$ be an $n \times n$ markov matrix.
+\[\therefore Be = e\]
+Now, Product of two markov matrix is markov matrix if sum along each row of result matrix is one. i.e. $(AB)e = e$.
+\[ABe = A(Be) = Ae = e\]
+Hence we can say that product of two Markov matrix is Markov.
+\end{Solution}
+
+
+\question  Give an example of a matrix A with the following three properties:
+\begin{parts}
+    \part A has eigenvalues -1 and 2.
+    \part The eigenvalue -1 has eigenvector
+    \begin{equation}
+    \left( 
+    \begin{array}{cc}
+         1 \\ 2 \\ 3
+    \end{array} 
+    \right )
+    \end{equation}
+    \part The eigenvalue 2 has eigenvector 
+        \begin{equation}
+    \left( 
+    \begin{array}{cc}
+         1 \\ 1 \\ 0
+    \end{array} 
+    \right )
+   and \left( 
+    \begin{array}{cc}
+         0 \\ 1 \\ 1
+    \end{array} 
+    \right )
+    \end{equation}
+\end{parts}
+        \begin{Solution}
+        An $n \times n$ matrix with $n$ independent eigenvectors can be expressed as $A=PDP^{-1}$, where $D$ is the diagonal matrix $diag(\lambda_1 \lambda_2\dots \lambda_n)$ and $P$ is the matrix $(v_1|v_2|\dots|v_n)$ where $v_i$ is the  eigenvector corresponding to eigenvalue $\lambda_i$.\\
+        
+        $D = \begin{bmatrix}
+    -1 & 0 & 0\\
+    0 & 2 & 0\\
+    0 & 0 & 2
+    \end{bmatrix}$, $P = \begin{bmatrix}
+    1 & 1 & 0\\
+    2 & 1 & 1\\
+    3 & 0 & 1
+    \end{bmatrix}$\\
+    So,
+        \begin{align*}
+        A &= PDP^{-1}\\
+        &= \begin{bmatrix}
+    1 & 1 & 0\\
+    2 & 1 & 1\\
+    3 & 0 & 1
+    \end{bmatrix}\begin{bmatrix}
+    -1 & 0 & 0\\
+    0 & 2 & 0\\
+    0 & 0 & 2
+    \end{bmatrix}\begin{bmatrix}
+    1 & 1 & 0\\
+    2 & 1 & 1\\
+    3 & 0 & 1
+    \end{bmatrix}^{-1}\\
+    &= \begin{bmatrix}
+    -1 & 2 & 0\\
+    -2 & 2 &2\\
+    -3 & 0 & 2
+    \end{bmatrix}\begin{bmatrix}
+    \frac{1}{2} & \frac{-1}{2} & \frac{1}{2}\\
+    \frac{1}{2} & \frac{1}{2} & \frac{-1}{2}\\
+    \frac{-3}{2} & \frac{3}{2} & \frac{-1}{2}
+    \end{bmatrix}\\
+    \therefore A&= \begin{bmatrix}
+    \frac{1}{2} & \frac{3}{2} & \frac{-3}{2}\\
+    -3 & 5 & -3\\
+    \frac{-9}{2} & \frac{9}{2} & \frac{-5}{2}
+    \end{bmatrix}
+        \end{align*}
+        matrix A satisfies all three properties. 
+        \end{Solution}
+
+\question Perform the Gram-Schmidt process on each of these basis for ${\rm I\!R^3}$. And convert the resulting orthogonal basis into orthonormal basis.
+
+\begin{parts}
+    \part 
+    $
+        \langle \left( \begin{array}{cc}
+         2 \\ 2 \\ 2
+    \end{array} \right), \left( \begin{array}{cc}
+         1 \\ 0 \\ -1
+    \end{array} \right),
+    \left( \begin{array}{cc}
+         0 \\ 3 \\ 1
+    \end{array} \right)
+    \rangle
+    $
+    
+    \begin{Solution}
+    Let, $u_1$, $u_2$ and $u_3$ are given basis for ${\rm I\!R^3}$.
+    Resulting orthogonal basis $v_1$, $v_2$ and $v_3$ can be found as follows:
+    \begin{align*}
+    \intertext{Let, $u_1 = \begin{pmatrix}
+    2  &
+    2 &
+    2
+ \end{pmatrix}^T$}
+    \therefore v_1 &= \frac{u_1}{\left \| u_1 \right \|}
+    = \frac{1}{\sqrt{12}}\begin{pmatrix}
+    2  &
+    2 &
+    2
+ \end{pmatrix}^T\\
+ \intertext{Let, $u_2 = \begin{pmatrix}
+    1  &
+    0 &
+    -1
+ \end{pmatrix}^T$}
+ \therefore w_2 &= u_2 - \langle u_2,v_1 \rangle v_1\\
+ &= \begin{pmatrix}
+    1  &
+    0 &
+    -1
+ \end{pmatrix}^T - 0*v_1\\
+ &= \begin{pmatrix}
+    1  &
+    0 &
+    -1
+ \end{pmatrix}^T\\
+    \therefore v_2 &= \frac{w_2}{\left \| w_2 \right \|}
+    = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1  &
+    0 &
+    -1
+ \end{pmatrix}^T\\
+ \intertext{Let, $u_3 = \begin{pmatrix}
+    0  &
+    3 &
+    1
+ \end{pmatrix}^T$}
+ \therefore w_3 &= u_3 - \langle u_3,v_1 \rangle v_1 - \langle u_3,v_2 \rangle v_2\\
+ &= u_3 - \frac{4}{\sqrt{3}}*v_1 +\frac{1}{\sqrt{2}}*v_2\\ 
+ &= \begin{pmatrix}
+    0  &
+    3 &
+    1
+ \end{pmatrix}^T - \frac{2}{3}*\begin{pmatrix}
+    2  &
+    2 &
+    2
+ \end{pmatrix}^T + \frac{1}{2}\begin{pmatrix}
+    1  &
+    0 &
+    -1
+ \end{pmatrix}^T\\
+ &= \begin{pmatrix}
+    -\frac{5}{6}  &
+    \frac{5}{3} &
+    -\frac{5}{6}
+ \end{pmatrix}^T\\
+ \therefore v_3 &= \frac{w_3}{\left \| w_3 \right \|}
+    = \frac{5}{\sqrt{6}}\begin{pmatrix}
+    -\frac{5}{6}  &
+    \frac{5}{3} &
+    -\frac{5}{6}
+ \end{pmatrix}^T
+    \end{align*}
+    Vector $v_1$ , $v_2$ and $v_3$ are orthonormal basis for ${\rm I\!R^3}$.
+    \end{Solution}
+
+    \part 
+    $
+        \langle \left( \begin{array}{cc}
+         1 \\ -1 \\ 0
+    \end{array} \right), \left( \begin{array}{cc}
+         0 \\ 1 \\ 0
+    \end{array} \right),
+    \left( \begin{array}{cc}
+         2 \\ 3 \\ 1
+    \end{array} \right)
+    \rangle
+    $
+    
+    \begin{Solution}
+    Let, $u_1$, $u_2$ and $u_3$ are given basis for ${\rm I\!R^3}$.
+    Resulting orthogonal basis $v_1$, $v_2$ and $v_3$ can be found as follows:
+    \begin{align*}
+    \intertext{Let, $u_1 = \begin{pmatrix}
+    1  &
+    -1 &
+    0
+ \end{pmatrix}^T$}
+    \therefore v_1 &= \frac{u_1}{\left \| u_1 \right \|}
+    = \frac{1}{\sqrt{2}}\begin{pmatrix}
+    1  &
+    -1 &
+    0
+ \end{pmatrix}^T\\
+ \intertext{Let, $u_2 = \begin{pmatrix}
+    0  &
+    1 &
+    0
+ \end{pmatrix}^T$}
+ \therefore w_2 &= u_2 - \langle u_2,v_1 \rangle v_1\\
+ &= \begin{pmatrix}
+    0  &
+    1 &
+    0
+ \end{pmatrix}^T + \frac{1}{2}*\begin{pmatrix}
+    1  &
+    -1 &
+    0
+ \end{pmatrix}^T\\
+ &= \begin{pmatrix}
+    \frac{1}{2}  &
+    \frac{1}{2} &
+    0
+ \end{pmatrix}^T\\
+    \therefore v_2 &= \frac{w_2}{\left \| w_2 \right \|}
+    = \sqrt{2}\begin{pmatrix}
+    \frac{1}{2}  &
+    \frac{1}{2} &
+    0
+ \end{pmatrix}^T\\
+ \intertext{Let, $u_3 = \begin{pmatrix}
+    2  &
+    3 &
+    1
+ \end{pmatrix}^T$}
+ \therefore w_3 &= u_3 - \langle u_3,v_1 \rangle v_1 - \langle u_3,v_2 \rangle v_2\\
+ &= u_3 + \frac{1}{\sqrt{2}}*v_1 -\frac{5}{2}\sqrt{2}*v_2\\ 
+ &= \begin{pmatrix}
+    2  &
+    3 &
+    1
+ \end{pmatrix}^T + \frac{1}{2}*\begin{pmatrix}
+    1  &
+    -1 &
+    0
+ \end{pmatrix}^T - 5\begin{pmatrix}
+    \frac{1}{2}  &
+    \frac{1}{2} &
+    0
+ \end{pmatrix}^T\\
+ &= \begin{pmatrix}
+    0  &
+    0 &
+    1
+ \end{pmatrix}^T\\
+ \therefore v_3 &= \frac{w_3}{\left \| w_3 \right \|}
+    = \begin{pmatrix}
+    0  &
+    0 &
+    1
+ \end{pmatrix}^T
+    \end{align*}
+    Vector $v_1$ , $v_2$ and $v_3$ are orthonormal basis for ${\rm I\!R^3}$.
+    \end{Solution}
+
+
+    
+\end{parts}
+
+\question Suppose, every year, 4\% of the birds from Canada migrate to the US, and 1\% of them travel to Mexico. Similarly, every year, 6\% of the birds from US migrate to Canada, and 4\% to Mexico. Finally, every year 10\% of the birds from Mexico migrate to the US, and 0\% go to Canada.
+\begin{parts}                   
+    \part Represent the above probabilities in a transition matrix.
+        \begin{Solution}
+        we have three countries: Canada, US and Mexico are the transition states 1,2 and 3 respectively.\\
+        Let Transition matrix is $P=[p_{ij}]$ where $p_{ij}$ represent probability of bird migrate from $j^{th}$ state to $i^{th}$ state.\\
+        So Transition matrix will be:
+        \[P = \begin{bmatrix}
+    0.95 & 0.06 & 0\\
+    0.04 & 0.90 &0.10\\
+    0.01 & 0.04 & 0.90
+    \end{bmatrix}\]
+    \end{Solution}
+    \part Is it possible that after some years, the number of birds in the 3 countries will become constant?
+        \begin{Solution}
+The number of birds in the 3 countries can be represented by vector $x = \begin{pmatrix}
+    x_1  &
+    x_2 &
+    x_3
+ \end{pmatrix}^T$.\\
+ We can say that the number of birds in the 3 countries will become constant if $Px = x$ where $P$ is transition matrix represents probability of bird migrate from $j^{th}$ state to $i^{th}$ state.
+ \begin{align*}
+     Px &=x\\
+     \therefore Px - x &= 0\\
+     \therefore (P - I)x &= 0\\
+     \begin{bmatrix}
+    0.95-1 & 0.06 & 0\\
+    0.04 & 0.90-1 &0.10\\
+    0.01 & 0.04 & 0.90-1
+    \end{bmatrix}\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+    \end{bmatrix} &= \begin{bmatrix}
+    0\\
+    0\\
+    0
+    \end{bmatrix}\\
+    \begin{bmatrix}
+    -0.05 & 0.06 & 0\\
+    0.04 & -0.10 &0.10\\
+    0.01 & 0.04 & -0.10
+    \end{bmatrix}\begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+    \end{bmatrix} &= \begin{bmatrix}
+    0\\
+    0\\
+    0
+    \end{bmatrix}\\
+    \intertext{By solving this system of equations using Gaussian elimination method we get,}
+    \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+    \end{bmatrix} = \begin{bmatrix}
+    \frac{30}{13}x_3\\
+    \frac{25}{13}x_3\\
+    x_3
+    \end{bmatrix} &= \begin{bmatrix}
+    \frac{30}{13}\\
+    \frac{25}{13}\\
+    1
+    \end{bmatrix} x_3
+ \end{align*}
+ Since we can get the vector $x$ such that $Px=x$, It is possible that after years the  number of birds in the 3 countries will become constant.
+    \end{Solution}
+\end{parts}
+
+
+\question
+\begin{parts}
+    \part Show that any set of four unique vectors in ${\rm I\!R^{2}}$ is linearly dependent.
+    \begin{Solution}
+    Let $V = \{v_1, v_2, v_3, v_4\}$ set of four unique vectors in ${\rm I\!R^{2}}$.\\
+    \textbf{case 1} : vector $v_1$ and $v_2$ are linearly dependent.\\
+    Then there are $\lambda_1$, $\lambda_2$ not both zero and $\lambda_1 v_1 + \lambda_2 v_2 = 0$.\\
+    
+    \textbf{case 2} : vector $v_1$ and $v_2$ are linearly independent.\\
+    so every vector $v_i=(u_1, u_2)$ is in the span of $v_1$, $v_2$. i.e. $v_i = \lambda_1 v_1 + \lambda_2 v_2$.\\
+    
+    Set is linearly dependent if one of $\lambda$ have non zero solution for 
+    \[\lambda_1 v_1 + \lambda_2 v_2 + \lambda_3 v_3 + \lambda_4 v_4= 0\]
+    we can write $v_3$ and $v_4$ in terms of $v_1$, $v_2$
+    \begin{align*}
+        \lambda_1 v_1 + \lambda_2 v_2 + \lambda_3 (a_1 v_1 + a_2 v_2) + \lambda_4 (a_3 v_1 + a_4 v_2) &= 0\\
+        (\lambda_1 +a_1 \lambda_3  + a_3 \lambda_4 )v_1 + (\lambda_2 +a_2 \lambda_3  + a_4 \lambda_4 )v_2 &=0 
+        \intertext{Since $v_1$ and $v_2$ are linearly independent,}
+        \lambda_1 +a_1 \lambda_3  + a_3 \lambda_4 &=0\\
+        \lambda_2 +a_2 \lambda_3  + a_4 \lambda_4 &=0
+    \end{align*}
+    Here, we have four variable and two equation (more variable and than equation) hence this homogeneous system has infinitely many solutions, in particular, it has a nonzero solution $\lambda_1,\lambda_2,\lambda_3,\lambda_4$.\\
+    
+    Hence any set of four unique vectors in ${\rm I\!R^{2}}$ is linearly dependent.
+    \end{Solution}
+    
+    \part What is the maximum number of unique vectors that a linearly independent subset of ${\rm I\!R^{2}}$ can have ?
+    
+\end{parts}
+    \begin{Solution}
+    Maximum number of unique vectors that a linearly independent subset of ${\rm I\!R^{2}}$ can have is 2.\\
+    
+    Since $v_1=(a,b)$ and $v_2=(c,d)$ vectors are linearly independent, every vector $v_3=(u_1, u_2)$ is in the span of $v_1$, $v_2$.
+    \[\lambda_1 v_1 + \lambda_2 v_2 = v_3\]
+    Then vectors $v_1$, $v_2$ and $v_3$ are
+    \[\lambda_1 v_1 + \lambda_2 v_2 + (-1) v_3 = 0\]
+    linearly dependent set.
+    \end{Solution}
+
+\question 
+\begin{parts}
+    
+\part Determine if the vectors \{$v_1, v_2, v_3$\} are linearly independent, where \\
+$v_1 = $ $\begin{bmatrix}
+    5  \\
+    0 \\
+    0
+ \end{bmatrix}$, $v_2 = $ $\begin{bmatrix}
+    7  \\
+    2 \\
+    -6
+ \end{bmatrix}$, 
+ $v_3 = $ $\begin{bmatrix}
+    9  \\
+    4 \\
+    -8
+ \end{bmatrix}$ \\
+Justify each answer
+    \begin{Solution}
+    Vectors $v_1$, $v_2$, $v_3$ are called linearly independent
+if they satisfy a relation
+$r_1v_1 + r_2v_2 + r_3v_3 = 0$,
+where the coefficients $r_1$, $r_2$, $r_3$ are all
+equal to zero.\\
+Let, matrix $V$ whose columns are given vectors $v_1$, $v_2$, $v_3$ and vector $r$ of the coefficients $r_1$, $r_2$, $r_3$.
+\begin{align*}
+    \therefore Vr &= 0\\
+    \begin{bmatrix}
+    5  & 7 & 9\\
+    0 & 2 & 4\\
+    0 & -6 &-8
+ \end{bmatrix}\begin{bmatrix}
+    r_1  \\
+    r_2 \\
+    r_3
+    \end{bmatrix} &= \begin{bmatrix}
+    0  \\
+    0 \\
+    0
+    \end{bmatrix}\\
+    \intertext{Using Gaussian elimination method,}
+    \begin{bmatrix}
+    5  & 7 & 9\\
+    0 & 2 & 4\\
+    0 & 0 & 4
+ \end{bmatrix}\begin{bmatrix}
+    r_1  \\
+    r_2 \\
+    r_3
+    \end{bmatrix} &= \begin{bmatrix}
+    0  \\
+    0 \\
+    0
+    \end{bmatrix}\\
+    \therefore r_3 = 0\\
+    2r_2 + 4r_3 = 0\\
+    \therefore r_2 = 0\\
+    5r_1 + 7r_2 + 9r_3 = 0\\
+    \therefore r_1 = 0
+\end{align*}
+    The coefficients $r_1$, $r_2$, $r_3$ are all
+equal to zero, thus vector $v_1$, $v_2$, $v_3$ are linearly independent.
+    \end{Solution}
+\part Prove that each set \{f, g\} is linearly independent in the vector space of all functions from ${\rm I\!R^{+}}$to ${\rm I\!R}$.
+\begin{enumerate}
+    \item f(x) = x and g(x) = $\frac{1}{x}$
+    \item f(x) = cos(x) and g(x) = sin(x)
+    \item f(x) = $e^x$ and g(x) = ln(x)
+\end{enumerate}
+
+    \begin{Solution}
+    Let, $f$ and $g$ be differentiable on $[a,b]$.  If Wronskian $W(f,g)(t_0)$  is nonzero for some $t_0$ in $[a,b]$ then $f$ and $g$ are linearly independent on $[a,b]$.  If $f$ and $g$ are linearly dependent then the Wronskian is zero for all $t$ in $[a,b]$.\\
+    
+    The Wronskian of two differentiable functions $f$ and $g$ is $W(f,g) = fg' - gf'$.
+    \begin{enumerate}
+    \item f(x) = x and g(x) = $\frac{1}{x}$
+    \[\therefore f'(x)=1 \hspace*{20mm} g'(x) = \frac{-1}{x^2}\]
+    \begin{align*}
+        \intertext{The Wronskian is}
+        W(f,g)(x) &= f(x)g'(x) - g(x)f'(x)\\
+        &= x*\frac{-1}{x^2} - \frac{1}{x}*1\\
+        &= - \frac{1}{x} - \frac{1}{x}\\
+        &= - \frac{2}{x}
+        \intertext{Now, put $x=1$ to get}
+        W(f,g)(1) &= -2
+        \intertext{which is nonzero. We can conclude that f(x) and g(x) are linearly independent.}
+    \end{align*}
+    \item f(x) = cos(x) and g(x) = sin(x)
+     \[\therefore f'(x)=-sin(x) \hspace*{20mm} g'(x) = cos(x)\]
+    \begin{align*}
+        \intertext{The Wronskian is}
+        W(f,g)(x) &= f(x)g'(x) - g(x)f'(x)\\
+        &= cos(x)*cos(x) - sin(x)*-sin(x)\\
+        &= cos^2(x) + sin^2(x)\\
+        &= 1
+        \intertext{Now, for any value of $x$, $W(f,g)(x)=1$ which is nonzero. We can conclude that f(x) and g(x) are linearly independent.}
+    \end{align*}
+    \item f(x) = $e^x$ and g(x) = ln(x)
+    \[\therefore f'(x)=e^x \hspace*{20mm} g'(x) = \frac{1}{x}\]
+    \begin{align*}
+        \intertext{The Wronskian is}
+        W(f,g)(x) &= f(x)g'(x) - g(x)f'(x)\\
+        &= e^x*\frac{1}{x} - ln(x)*e^x\\
+        &= e^x(\frac{1}{x} - ln(x))\\
+        \intertext{Now, put $x=1$ to get}
+        W(f,g)(1) &= e(1-0) = e
+        \intertext{which is nonzero. We can conclude that f(x) and g(x) are linearly independent.}
+    \end{align*}
+\end{enumerate}
+    \end{Solution}
+\end{parts}
+\question Let $t_{\theta}$ be 
+\begin{equation}
+    \left( \begin{array}{cc}
+     \cos{\theta} & -\sin{\theta} \\
+     \sin{\theta} & \cos{\theta}
+\end{array} \right)
+\end{equation}\\
+\begin{parts}
+    \part Show that $t_{\theta_{1}+\theta_{2}} = t_{\theta_{1}}*t_{\theta_{2}} $ (* here stands for matrix multiplication).
+    \begin{Solution}
+    Given,
+    \begin{align*}
+        t_{\theta} &= \begin{bmatrix}
+        \cos{\theta} & -\sin{\theta} \\
+     \sin{\theta} & \cos{\theta}
+        \end{bmatrix}\\
+        \intertext{Now,}
+        t_{\theta_1+\theta_2} &= \begin{bmatrix}
+        \cos{(\theta_1+\theta_2)} & -\sin{(\theta_1+\theta_2)} \\
+     \sin{(\theta_1+\theta_2)} & \cos{(\theta_1+\theta_2)}
+        \end{bmatrix}\\ 
+        &= \begin{bmatrix}
+        \cos{\theta_1}\cos{\theta_2}-\sin{\theta_1}\sin{\theta_2} & -\sin{\theta_1}\cos{\theta_2}-\cos{\theta_1}\sin{\theta_2} \\
+     \sin{\theta_1}\cos{\theta_2}+\cos{\theta_1}\sin{\theta_2} & \cos{\theta_1}\cos{\theta_2}-\sin{\theta_1}\sin{\theta_2}
+        \end{bmatrix}\hspace*{15mm}(1)\\ 
+    \intertext{And,}
+    t_{\theta_1} * t_{\theta_2} &= \begin{bmatrix}
+        \cos{\theta_1} & -\sin{\theta_1} \\
+     \sin{\theta_1} & \cos{\theta_1}
+        \end{bmatrix}\begin{bmatrix}
+        \cos{\theta_2} & -\sin{\theta_2} \\
+     \sin{\theta_2} & \cos{\theta_2}
+        \end{bmatrix}\\
+                &= \begin{bmatrix}
+        \cos{\theta_1}\cos{\theta_2}-\sin{\theta_1}\sin{\theta_2} & -\sin{\theta_1}\cos{\theta_2}-\cos{\theta_1}\sin{\theta_2} \\
+     \sin{\theta_1}\cos{\theta_2}+\cos{\theta_1}\sin{\theta_2} & \cos{\theta_1}\cos{\theta_2}-\sin{\theta_1}\sin{\theta_2}
+        \end{bmatrix}\hspace*{15mm}(2)
+    \end{align*}
+    from result (1) and (2), we can say that $t_{\theta_{1}+\theta_{2}} = t_{\theta_{1}}*t_{\theta_{2}}$.
+    \end{Solution}
+    \part Show that $ t_{\theta}^{-1} = t_{-\theta}. $
+    
+    \begin{Solution}
+    Given,
+    \begin{align*}
+        t_{\theta} &= \begin{bmatrix}
+        \cos{\theta} & -\sin{\theta} \\
+     \sin{\theta} & \cos{\theta}
+        \end{bmatrix}\\
+        \intertext{Now,}
+        t_{\theta}^{-1} &= \frac{adj(t_{\theta})}{det(t_{\theta})}\\
+        &= \frac{1}{\cos^{2}{\theta}+\sin^{2}{\theta}}\begin{bmatrix}
+        \cos{\theta} & \sin{\theta} \\
+     -\sin{\theta} & \cos{\theta}
+        \end{bmatrix}\\
+        &= \begin{bmatrix}
+        \cos{\theta} & \sin{\theta} \\
+     -\sin{\theta} & \cos{\theta}
+        \end{bmatrix}\hspace*{40mm}(1)\\
+    \intertext{And,}
+    t_{-\theta} &= \begin{bmatrix}
+        \cos{(-\theta)} & -\sin{(-\theta)} \\
+     \sin{(-\theta)} & \cos{(-\theta)}
+        \end{bmatrix}\\
+        \intertext{Since, cos is even function. $\therefore \cos{(-\theta)} = \cos{(\theta)}$.
+        and sin is odd function. $\therefore \sin{(-\theta)} = -\sin{(\theta)}$.}
+        &= \begin{bmatrix}
+        \cos{\theta} & \sin{\theta} \\
+     -\sin{\theta} & \cos{\theta}
+        \end{bmatrix}\hspace*{40mm}(2)
+    \end{align*}
+    from result (1) and (2), we can say that $t_{\theta}^{-1} = t_{-\theta}$.
+    \end{Solution}
+    
+\end{parts}
+ 
+
+\question Given matrix has distinct eigenvalues \\ \\
+ $\begin{bmatrix}
+    1 & 2 & 1  \\
+    6 & -1 & 0\\
+    -1 & -2 & -1
+ \end{bmatrix}$
+
+ \begin{parts}
+     \part Diagonalize it.
+     \begin{Solution}
+     The characteristic polynomial $p(\lambda)$ of a given matrix A is:
+     \begin{align*}
+         p(\lambda) &= det(A-\lambda I)\\
+         &= \begin{vmatrix}
+    1-\lambda & 2 & 1  \\
+    6 & -1-\lambda & 0\\
+    -1 & -2 & -1-\lambda
+ \end{vmatrix}\\
+        &= (1-\lambda)((-1-\lambda)^2 - 0) - 2(6(-1-\lambda) - 0) + 1(-12 - (-1)(-1-\lambda))\\
+        &= -\lambda^3- \lambda^2 +12\lambda\\
+        &= -\lambda(\lambda^2 + \lambda  -12)\\
+       p(\lambda) &= -\lambda(\lambda +4) (\lambda -3)\\
+       \intertext{From the characteristic equation, the eigenvalues are:}
+       \lambda_1 &= 0\\
+       \lambda_2 &= -4\\
+       \lambda_3 &= 3\\
+       \end{align*}
+       \begin{align*}
+       \intertext{Now, eigenvectors $x_1$, $x_2$ and $x_3$  corresponding to eigenvalues $\lambda_1$, $\lambda_2$ and $\lambda_3$ can be calculate as follows: }
+       Ax_1 &= \lambda_1 x_1\\
+       \therefore (A -\lambda_1 I) x_1 &= 0 \\
+       \begin{bmatrix}
+    1 & 2 & 1  \\
+    6 & -1 & 0\\
+    -1 & -2 & -1
+ \end{bmatrix} \begin{bmatrix}
+    x_{11} \\
+    x_{12}\\
+    x_{13}
+ \end{bmatrix} &= 0
+ \intertext{By solving this,}
+ x_1 = \begin{bmatrix}
+    x_{11} \\
+    x_{12}\\
+    x_{13}
+ \end{bmatrix} &= \begin{bmatrix}
+    \frac{-1}{13} \\
+    \frac{-6}{13}\\
+    1
+ \end{bmatrix}\\
+ Ax_2 &= \lambda_2 x_2\\
+       \therefore (A -\lambda_2 I) x_2 &= 0 \\
+       \begin{bmatrix}
+    5 & 2 & 1  \\
+    6 & 3 & 0\\
+    -1 & -2 & 3
+ \end{bmatrix} \begin{bmatrix}
+    x_{21} \\
+    x_{22}\\
+    x_{23}
+ \end{bmatrix} &= 0
+ \intertext{By solving this,}
+ x_2 = \begin{bmatrix}
+    x_{21} \\
+    x_{22}\\
+    x_{23}
+ \end{bmatrix} &= \begin{bmatrix}
+    -1 \\
+    2\\
+    1
+ \end{bmatrix}\\
+ Ax_3 &= \lambda_3 x_3\\
+       \therefore (A -\lambda_3 I) x_3 &= 0 \\
+       \begin{bmatrix}
+     -2 & 2 & 1  \\
+    6 & -4 & 0\\
+    -1 & -2 & -4
+ \end{bmatrix} \begin{bmatrix}
+    x_{31} \\
+    x_{32}\\
+    x_{33}
+ \end{bmatrix} &= 0
+ \intertext{By solving this,}
+ x_3 = \begin{bmatrix}
+    x_{31} \\
+    x_{32}\\
+    x_{33}
+ \end{bmatrix} &= \begin{bmatrix}
+    -1 \\
+    \frac{-3}{2}\\
+    1
+ \end{bmatrix}\\
+ \intertext{The Diagonal matrix is:}
+ D = \begin{bmatrix}
+    0 & 0 & 0  \\
+    0 & -4 &0\\
+    0 & 0 & 3
+ \end{bmatrix}
+ \intertext{The matrix with the eigenvectors $(x_1, x_2, x_3)$ as its columns:}
+ P = \begin{bmatrix}
+    \frac{-1}{13} & -1 & -1  \\
+    \frac{-6}{13} & 2 & \frac{-3}{2}\\
+    1 & 1 & 1
+ \end{bmatrix}\\
+  \therefore P^{-1} = \begin{bmatrix}
+    \frac{13}{12} & 0 & \frac{13}{12}  \\
+    \frac{-9}{28} & \frac{2}{7} & \frac{3}{28}\\
+    \frac{-16}{21} & \frac{-2}{7} & \frac{-4}{21}
+ \end{bmatrix}
+ \end{align*}
+ \begin{align*}
+ \intertext{So, Diagonalize matrix D will be $P^{-1}AP$.}
+ D &= \begin{bmatrix}
+    \frac{13}{12} & 0 & \frac{13}{12}  \\
+    \frac{-9}{28} & \frac{2}{7} & \frac{3}{28}\\
+    \frac{-16}{21} & \frac{-2}{7} & \frac{-4}{21}
+ \end{bmatrix}\begin{bmatrix}
+    1 & 2 & 1  \\
+    6 & -1 & 0\\
+    -1 & -2 & -1
+ \end{bmatrix}\begin{bmatrix}
+    \frac{-1}{13} & -1 & -1  \\
+    \frac{-6}{13} & 2 & \frac{-3}{2}\\
+    1 & 1 & 1
+ \end{bmatrix}\\
+ &= \begin{bmatrix}
+    0 & 0 & 0  \\
+    0 & -4 &0\\
+    0 & 0 & 3
+ \end{bmatrix}
+     \end{align*}
+    \end{Solution}
+     \part Find a basis with respect to which this matrix has that diagonal representation
+     \begin{Solution}
+    The eigenvectors of matrix is the basis for which the matrix A can be represented by a diagonal matrix. We have found eigenvectors in previous question. So,\\
+    $\langle \left( \begin{array}{cc}
+         \frac{-1}{13} \\ \frac{-6}{13} \\ 1
+    \end{array} \right), \left( \begin{array}{cc}
+         -1 \\ 2 \\ 1
+    \end{array} \right),
+    \left( \begin{array}{cc}
+         -1 \\ \frac{-3}{2} \\ 1
+    \end{array} \right)
+    \rangle$ is the basis.
+    \end{Solution}
+     \part Find the matrices P and $P^{-1}$ to effect the change of basis.
+ \end{parts}
+\begin{Solution}
+matrix $P$ and $p^{-1}$ to effect the change of basis can be given as:\\
+$P = \begin{bmatrix}
+    \frac{-1}{13} & -1 & -1  \\
+    \frac{-6}{13} & 2 & \frac{-3}{2}\\
+    1 & 1 & 1
+ \end{bmatrix}$ \hspace*{20mm} $P^{-1} = \begin{bmatrix}
+    \frac{13}{12} & 0 & \frac{13}{12}  \\
+    \frac{-9}{28} & \frac{2}{7} & \frac{3}{28}\\
+    \frac{-16}{21} & \frac{-2}{7} & \frac{-4}{21}
+ \end{bmatrix}$
+\end{Solution}
+
+\question * \textbf{Induced Matrix Norms}
+\newline
+In case you didn't already know, a norm $\|.\|$ is any function with the following properties:
+\begin{enumerate}
+    \item $\|x\| \geq 0$ for all vectors $x$.
+    \item $\|x\| = 0 \iff x = \mathbf{0}$.
+    \item $\|\alpha x\| = |\alpha| \|x\|$ for all vectors $x$, and real numbers $\alpha$.
+    \item $\|x + y\| \leq \|x\| + \|y\|$ for all vectors $x, y$.
+\end{enumerate}
+
+Now, suppose we're given some vector norm $\|.\|$ (this could be L2 or L1 norm, for example). We would like to use this norm to measure the size of a matrix $A$. One way is to use the corresponding induced matrix norm, which is defined as $\|A\| = \sup_{x} \{\| Ax \| : \|x \| = 1\}$.
+
+E.g.: $\|A\|_2 = \sup_{x} \{ \|Ax\|_2 : \|x\|_2 = 1 \}$, where $\|.\|_2$ is the standard L2 norm for vectors, defined by $\|x\|_2 = \sqrt{x^Tx}$.\\
+Note: sup stands for supremum.
+
+Prove the following properties for an arbitrary induced matrix norm:
+
+\begin{parts}
+    \part $\| A \| \geq 0$.
+    \begin{Solution}
+    We know that,
+    \[\|A\| = \sup_{\|x \| = 1} \{\| Ax \|\}\hspace*{30mm}(1)\]
+    Since $\| Ax \| \geq 0$ (from vector norm property (1) because $Ax$ is vector),
+    \[\therefore\|A\| \geq 0\] 
+    \end{Solution}
+    \part $\|\alpha A\| = |\alpha| \|A\|$ for any real number $\alpha$.
+    \begin{Solution}
+    \[\|\alpha A\| = \sup_{\|x \| = 1} \{\| \alpha Ax \|\}\]
+    here, $Ax$ is vector. so from vector norm property (3) we can write $\| \alpha Ax \|\ = |\alpha|\| Ax \|$,
+    \begin{align*}
+        \|\alpha A\| &= \sup_{\|x \| = 1} \{|\alpha|\| Ax \|\}\\
+        &= |\alpha| \sup_{\|x \| = 1} \{\| Ax \|\}\\
+        \intertext{from equation (1) we can write as,}
+        \therefore \|\alpha A\| &= |\alpha| \| A \|
+    \end{align*}
+    \end{Solution}
+    \part $\| A + B \| \leq \|A\| + \|B\|$.
+    \begin{Solution}
+    \begin{align*}
+        \|A+ B\| &= \sup_{\|x \| = 1} \{\| (A+B)x \|\}\\
+        &= \sup_{\|x \| = 1} \{\| Ax+Bx \|\}
+    \end{align*}
+    here, $Ax$ and $Bx$ are vectors. so from vector norm property (4) we can write $\|Ax+Bx \|\ \leq \| Ax \| + \| Bx \|$,
+    \begin{align*}
+         \|A+ B\| &\leq \sup_{\|x \| = 1} \{\| Ax \| + \| Bx \|\}\\
+        & \leq \sup_{\|x \| = 1} \{\| Ax \|\} + \sup_{\|x \| = 1} \{\| Bx \|\}\\
+        \intertext{from equation (1) we can write as,}
+        \therefore \|A+ B\| &\leq  \| A \|+\| B \|
+    \end{align*}
+    \end{Solution}
+    \part $\| A \| = 0 \iff A = 0$.
+    \begin{Solution}
+    We have to prove two statements.
+    \begin{enumerate}
+    \item $\| A \| = 0 \implies A = 0$.
+    \[\| A \| = \sup_{\|x \| = 1} \{\| Ax \|\} = 0\]
+    here, $Ax$ is vector. from vector norm property (2) we can say that, 
+    \begin{align*}
+        \|Ax\| = 0 &\implies Ax = \mathbf{0}\\
+        &\implies A = \mathbf{0} \hspace*{20mm}(\because x \neq \mathbf{0})
+    \end{align*}
+    Hence $\|A\| = 0 \implies A = \mathbf{0}$ is proved.
+    \item $A = 0 \implies \| A \| = 0$.\\
+    $A = 0$ then $Ax = 0$.\\
+    here, $Ax$ is vector. from vector norm property (2) we can say that, 
+    \begin{align*}
+        Ax = \mathbf{0} &\implies \|Ax\| = 0\\
+        &\implies \|A\| = 0 \hspace*{20mm}\Big(\because \|A\|= \sup_{\|x \| =1} \{\|Ax\|\}\Big)
+    \end{align*}
+    Hence $A = \mathbf{0} \implies \|A\| = 0$ is proved.
+    \end{enumerate}
+    From both statements, $\| A \| = 0 \iff A = 0$.
+    \end{Solution}
+    \part $\|AB\| \leq \|A\|\|B\|$.
+    \begin{Solution}
+    Matrix norm defined as $\|A\| = \sup_{\|x \| \neq 0} \{\frac{\|Ax\|}{\|x \|}\}$.
+    \begin{align*}
+            \|A\| &= \sup_{\|x \| \neq 0} \{\frac{\|Ax\|}{\|x \|}\}
+        \geq \frac{\|Ay\|}{\|y \|} \hspace*{20mm} (for\,an\,arbitrary\,y)\\
+        \therefore \|Ay\| &\leq \|A \|\|y \| \hspace*{45mm} (property\,I)
+    \end{align*}
+    Now,
+    \begin{align*}
+        \|AB\| &= \sup_{\|x \| = 1} \{\| ABx \|\}
+    \intertext{here, $A$ is matrix and $Bx$ is vector. so from property I we can write $\|ABx \|\ \leq \| A\| \| Bx\|$,}
+         \|AB\| &\leq \sup_{\|x \| = 1} \{\| A \|\| Bx \|\}\\
+        & \leq \| A \| \sup_{\|x \| = 1} \{\| Bx \|\}\\
+        \intertext{from equation (1) we can write as,}
+        \therefore \|AB\| &\leq  \| A \|\| B \|
+    \end{align*}
+    \end{Solution}
+    \part $\|A\|_2 = \sigma_{\max}(A)$, where $\sigma_{\max}$ is the largest singular value.
+    \begin{Solution}
+    The singular value decomposition of Matrix A of the form,
+    \[A = U \Sigma V^{*} \hspace*{55mm}(1)\]
+    where, $U$ and $V$ are an unitary matrix, $\Sigma$ is a diagonal matrix with non-negative real numbers on the diagonal, and $V^{*}$ is the conjugate transpose of $V$.\\
+    Now,
+    \begin{align*}
+        \|A\| = \sup_{\|x \| = 1} \{\| Ax \|\} &= \sup_{\|x \| = 1} \{\| U \Sigma V^{*}x \|\}\hspace*{20mm}(from\,(1))\\
+        &= \sup_{\|x \| = 1} \{\| \Sigma V^{*}x \|\}\\
+        \intertext{since $U$ is unitary, that is, $\|Ux\|^2=x^TU^T Ux=x^Tx=\|x\|^2$, for some vector $x$.}
+        \intertext{Let $y=V^{*}x$. By the same argument above, $\|y\|^2=\|V^{*}x\|^2=\|x\|^2=1$ since $V$ is unitary.}
+        \sup_{\|x \| = 1} \{\| \Sigma V^{*}x \|\}&= \sup_{\|y \| = 1} \{\| \Sigma y\|\}\\
+        &= \sup_{\|y \| = 1} \{(\sum_{i}{}\sigma_i^2 y_i^2)^{\frac{1}{2}}\}\\
+        &= \sigma_i
+    \end{align*}
+    Where, $\sigma_i$ is maximum singular value.\\
+    The maximum for the above is attained when $y=\begin{pmatrix}
+    1  &
+    0 &
+    \cdots &
+    0
+ \end{pmatrix}^T$ where $\sigma_1$ is maximum value. \\
+ so, $\|A\| = \sigma_{\max}(A)$ is proved.
+    \end{Solution}
+\end{parts}
+
+\question Prove that the eigen vectors of a real symmetric($ S_{n*n}$) matrix are linearly independent and form an orthogonal basis for $R^n$.
+\begin{Solution}
+Assume that $ S_{n*n}$ is real symmetric matrix, and $x$ and $y$ are eigenvectors of $S$ corresponding to distinct eigenvalues $\lambda$ and $\mu$. Then,\\
+\begin{align*}
+    Sx &= \lambda x\\
+    \therefore (Sx)^T &= x^t S^t = x^TS = \lambda x^T \hspace*{30mm}(1)\\
+    Sy &= \mu y \hspace*{59mm}(2)\\
+    \lambda \langle x,y \rangle &= \lambda x^T y\\
+    &= x^TSy \hspace*{55mm}(from\,(1))\\
+    &= x^T(\mu y)\hspace*{52mm}(from\,(2))\\
+    &= \mu x^Ty\\
+    &= \mu \langle x,y \rangle\\
+    \therefore (\lambda - \mu) \langle x,y \rangle &= 0
+\end{align*}
+ Since $(\lambda - \mu) \neq 0$, then $\langle x,y \rangle=0$, i.e., $x \perp y$.\\
+ Since vectors are orthogonal they are also linearly independent.\\
+ 
+ Hence the eigen vectors of a real symmetric matrix are linearly independent and form an orthogonal basis for $R^n$.
+\end{Solution}
+
+\question \textbf{RAYLEIGH QUOTIENT}
+\newline Let A be an n$ \times $n real symmetric matrix with eigenvalues $\lambda_1 \leq \lambda_2 \leq \lambda_3 \leq \dots \leq  \lambda_n $ and corresponding orthonormal eigenvectors $ v_1, \dots, v_n $.
+
+\begin{parts}
+    \part Show that
+    \begin{equation}
+        \lambda_1 = \min_{x \neq 0} \frac{\langle x, Ax \rangle}{\norm{x}^2} \; \; \; and \; \; \; \lambda_n = \max_{x \neq 0} \frac{\langle x, Ax \rangle}{\norm{x}^2}.
+    \end{equation}
+    Also, show directly that if $v \neq 0$ minimizes $\frac{\langle x, Ax \rangle}{\norm{x}^2}$, then v is an eigenvector of A corresponding to the minimum eigenvalue of A.
+\begin{Solution}
+Let A be an n$ \times $n real symmetric matrix with orthonormal eigenvectors $ v_1, v_2, \dots, v_n $ and corresponding eigenvalues $\lambda_1 ,\lambda_2, \dots \lambda_n $.
+\begin{align*}
+    \intertext{matrix A can be represent as,}
+    A &= \sum_{i=1}^{n} \lambda_i v_i v_i^T\hspace*{30mm}(1)\\
+    \intertext{for any vector $x \in\mathbb R^n$, we can express it as, $x=\sum_{i=1}^{n}k_i v_i$}
+    \langle x,Ax \rangle &= x^T Ax\\
+    &= (\sum_{i=1}^{n}k_i v_i)^T(\sum_{i=1}^{n}k_i Av_i)\\
+    &= (\sum_{i=1}^{n}k_i v_i)^T(\sum_{i=1}^{n}k_i \lambda_i v_i)\\
+    \therefore \langle x,Ax \rangle &= \sum_{i=1}^{n} {k_i}^{2} \lambda_i\hspace*{35mm}(2)\\
+    \|x\|^2 &= x^Tx\\
+    &= (\sum_{i=1}^{n}k_i v_i)^T(\sum_{i=1}^{n}k_i v_i)\\
+    &= \sum_{i,j}^{}k_i k_j v_i^T v_j\\
+    \therefore \|x\|^2 &= \sum_{i=1}^{n} {k_i}^{2} \hspace*{38mm}(3)\\
+    R_A(x) &= \frac{x^TAx}{\|x\|^2}\\
+        &= \frac{\sum_{i=1}^{n} {k_i}^{2} \lambda_i}{\sum_{i=1}^{n} {k_i}^{2}} \hspace*{30mm}(4)\\&\hspace*{55mm}(from\,(2)\,and\,(3))
+        \intertext{Since $\lambda_1 \leq \lambda_2 \leq \lambda_3 \leq \dots \leq  \lambda_n $}
+        R_A(x) & \geq \frac{\sum_{i=1}^{n} {k_i}^{2} \lambda_1}{\sum_{i=1}^{n} {k_i}^{2}}\\ 
+        & \geq \lambda_1\frac{\sum_{i=1}^{n} {k_i}^{2} }{\sum_{i=1}^{n} {k_i}^{2}}\\
+        & \geq \lambda_1\\
+        \therefore \min_{x\neq 0} R_A(x) &= \min_{x\neq 0} \frac{\langle x,Ax \rangle}{\|x\|^2} =\lambda_1 \hspace*{30mm}(5)\\
+        \intertext{Similarly,}
+        R_A(x) & \leq \frac{\sum_{i=1}^{n} {k_i}^{2} \lambda_n}{\sum_{i=1}^{n} {k_i}^{2}}\\ 
+        & \leq \lambda_n\frac{\sum_{i=1}^{n} {k_i}^{2} }{\sum_{i=1}^{n} {k_i}^{2}}\\
+        & \leq \lambda_n\\
+        \therefore \max_{x\neq 0} R_A(x) &= \max_{x\neq 0} \frac{\langle x,Ax \rangle}{\|x\|^2} = \lambda_n \hspace*{30mm}(6)
+        \intertext{If vector $v$ minimizes $R_A(x)$ then,}
+        \min_{x\neq 0} \frac{\langle x,Ax \rangle}{\|x\|^2} &= \frac{\langle v,Av \rangle}{\|v\|^2}\\
+        &= \frac{v^TAv}{v^Tv}\\
+        &= \frac{v^T\lambda v}{v^Tv}\\
+        &= \lambda \frac{v^T v}{v^Tv}\\
+        &= \lambda
+        \intertext{From equation (5) we know that $\min_{x\neq 0} \frac{\langle x,Ax \rangle}{\|x\|^2}= \lambda_1$}
+        \therefore \lambda &= \lambda_1
+\end{align*}
+Hence  $v$ is an eigenvector of $A$ corresponding to the minimum eigenvalue of $A$.
+\end{Solution}
+\part show that
+\begin{equation}
+        \lambda_2 = \min_{x \perp v_{1}, x \neq 0} \frac{\langle x, Ax \rangle}{\norm{x}^2}.
+    \end{equation}
+\begin{Solution}
+This will be same as previous proof except the fact that all the vectors $x$ are orthogonal to the eigenvector $v_1$.
+\begin{align*}
+    \intertext{For any vector $x \in\mathbb R^n$, we can express it as linear combination of eigenvectors $v_2,v_3,\cdots,v_n$ and the component of $v_1$ will be 0, $x=\sum_{i=2}^{n}k_i v_i$}
+    \langle x,Ax \rangle &= x^T Ax\\
+    &= (\sum_{i=2}^{n}k_i v_i)^T(\sum_{i=2}^{n}k_i Av_i)\\
+    &= (\sum_{i=2}^{n}k_i v_i)^T(\sum_{i=2}^{n}k_i \lambda_i v_i)\\
+    \therefore \langle x,Ax \rangle &= \sum_{i=2}^{n} {k_i}^{2} \lambda_i\hspace*{35mm}(1)\\
+    \|x\|^2 &= x^Tx\\
+    &= (\sum_{i=2}^{n}k_i v_i)^T(\sum_{i=2}^{n}k_i v_i)\\
+    &= \sum_{i,j}^{}k_i k_j v_i^T v_j\\
+    \therefore \|x\|^2 &= \sum_{i=2}^{n} {k_i}^{2} \hspace*{38mm}(2)\\
+    R_A(x) &= \frac{x^TAx}{\|x\|^2}\\
+        &= \frac{\sum_{i=2}^{n} {k_i}^{2} \lambda_i}{\sum_{i=2}^{n} {k_i}^{2}} \hspace*{30mm}(3)\\&\hspace*{55mm}(from\,(1)\,and\,(2))
+        \intertext{Since $\lambda_2 \leq \lambda_3 \leq \dots \leq  \lambda_n $}
+        R_A(x) & \geq \frac{\sum_{i=1}^{n} {k_i}^{2} \lambda_2}{\sum_{i=1}^{n} {k_i}^{2}}\\ 
+        & \geq \lambda_2\frac{\sum_{i=1}^{n} {k_i}^{2} }{\sum_{i=1}^{n} {k_i}^{2}}\\
+        & \geq \lambda_2\\
+        \therefore \min_{x\perp v_1,x\neq 0} R_A(x) &= \min_{x\perp v_1,x\neq 0} \frac{\langle x,Ax \rangle}{\|x\|^2} =\lambda_2 \hspace*{30mm}(4)\\
+\end{align*}
+\end{Solution}
+\end{parts}
+
+\question An m $\times$  n matrix has full row rank if its row rank is m, and it has full column rank if its column rank is n. Show that a matrix can have both full row rank and full column rank only if it is a square matrix.
+\begin{Solution}
+A matrix is full row rank when each of the rows of the matrix are linearly independent and full column rank when each of the columns of the matrix are linearly independent.\\
+
+For a non-square matrix with $m$ rows and $n$ columns, there will always be the case that either the rows or columns (whichever is larger in number) are linearly dependent because number of row/column vectors will be greater than dimension. so matrix can not have both both full row rank and full column rank.\\
+
+A square matrix can have all rows and columns linearly independent.\\
+
+Hence a matrix can have both full row rank and full column rank only if it is a square matrix.
+\end{Solution}
+
+
+\question Let A be a $m\times n$ matrix, and suppose $\vec{v}$ and $\vec{w}$ are orthogonal eigenvectors of $A^{T}A$. Show that $A\vec{v}$ and $A\vec{w}$ are orthogonal.
+\begin{Solution}
+Let A be a $m\times n$ matrix.\\
+$\vec{v}$ and $\vec{w}$ are orthogonal eigenvectors of $A^{T}A$.\\
+Suppose $\lambda_1$ and $\lambda_2$ are corresponding eigenvalues.\\
+\[\therefore A^{T}A v = \lambda_1 v\hspace*{30mm}(1)\]
+\[\therefore A^{T}A w = \lambda_2 w\hspace*{30mm}(2)\]
+Now, to show that $Av$ and $Aw$ are orthogonal we have to prove that $(Av)^{T}(Aw)=0$.\\
+    \[(Av)^{T}(Aw) = v^{T}A^{T}Aw \]
+From equation (2),
+\[(Av)^{T}(Aw) = v^{T}\lambda_2w \]
+Since, $\lambda_2$ is scalar we can write it as:
+\[(Av)^{T}(Aw) = \lambda_2v^{T}w \]
+We know that, vector $v$ and $w$ are orthogonal eigenvectors so $v^{T} w = 0$.\\
+\[\therefore (Av)^{T}(Aw) = 0 \]
+Hence $A\vec{v}$ and $A\vec{w}$ are orthogonal.
+\end{Solution}
+
+\question Let $u_{1}, u_2, ...., u_n$ be a set of $n$ orthonormal vectors. Similarly let $v_{1}, v_2, ...., v_n$ be another set of $n$ orthonormal vectors.
+\begin{parts}
+    \part Show that $u_{1}v_{1}^T$ is a rank-1 matrix.
+    \begin{Solution}
+    Let $A = u_{1}v_{1}^T$\\
+    If $x \in\mathbb R^m$ then matrix A can be used to define a linear transformation $L_A\colon\mathbb{R}^m\to\mathbb{R}^n$ given by $L_A(x) = Ax$,
+    \[Ax = u_{1}v_{1}^Tx = \langle x,v_1 \rangle u_1\]
+    ($\because v_{1}^Tx$ is dot product of $x$ and $v_1$ and it is scalar.)\\
+    
+    Thus, matrix $A$ maps every vector in $R^m$ to a scalar multiple of vector $u_1$. \\
+    Hence,\begin{align*}
+        rank(u_1v_1^T)=rank(A)&=rank(L_A)\\
+                            &=dim(im(A))\\
+                            &=rank(u_1)\\
+                            &=1
+    \end{align*} 
+    \end{Solution}
+    
+    \part Show that $u_{1}v_{1}^T + u_{2}v_{2}^T$ is a rank-2 matrix.
+    \begin{Solution}
+    Let, $A = u_{1}v_{1}^T + u_{2}v_{2}^T$\\
+    We can find the SVD of matrix A, which has the form:
+    \begin{align*}
+        A = U\Sigma V^T
+        \intertext{Where $U$ and $V$ are orthogonal matrix.Now,}
+        u_{1}v_{1}^T + u_{2}v_{2}^T &= \begin{bmatrix}
+        u_1 &    u_2 \end{bmatrix}\begin{bmatrix}
+        v_1^T \\    v_2^T \end{bmatrix}\\
+        &= \begin{bmatrix}
+        u_1 &    u_2 \end{bmatrix}\begin{bmatrix}
+        1 & 0 \\0 & 1 \end{bmatrix}\begin{bmatrix}
+        v_1^T \\    v_2^T \end{bmatrix}\\
+        &= U I_2 V
+    \end{align*}
+    Which is singular value decomposition of matrix $A$.\\
+    
+    The rank of a matrix is equal to the number of non-zero singular values which is 2.\\
+    Hence rank of $u_{1}v_{1}^T + u_{2}v_{2}^T$ is 2.
+    \end{Solution}
+    
+    \part Show that $\sum_{i=1}^{n} u_{i}v_{i}^T$ is a rank-n matrix.
+    \begin{Solution}
+    Let, $A = \sum_{i=1}^{n} u_{i}v_{i}^T$\\
+    We can find the SVD of matrix A, which has the form:
+    \begin{align*}
+        A = U\Sigma V^T
+        \intertext{Where $U$ and $V$ are orthogonal matrix.Now,}
+        \sum_{i=1}^{n} u_{i}v_{i}^T &= \begin{bmatrix}
+        u_1 &    u_2 & \cdots & u_n \end{bmatrix}\begin{bmatrix}
+        v_1^T \\    v_2^T \\ \vdots \\v_n^T\end{bmatrix}\\
+        &= \begin{bmatrix}
+        u_1 &    u_2 & \cdots & u_n \end{bmatrix}\begin{bmatrix}
+        1 & 0& \cdots &0\\0 & 1& \cdots &0\\\vdots & \vdots & \ddots & \vdots\\0 & 0 & \cdots& 1 \end{bmatrix}\begin{bmatrix}
+        v_1^T \\    v_2^T \\ \vdots \\v_n^T\end{bmatrix}\\
+        &= U I_n V
+    \end{align*}
+    Which is singular value decomposition of matrix $A$.\\
+    
+    The rank of a matrix is equal to the number of non-zero singular values in $I_n$ which is $n$.\\
+    Hence rank of $\sum_{i=1}^{n} u_{i}v_{i}^T$ is $n$.
+    \end{Solution}
+\end{parts}
+
+\end{questions}
+\end{document} 
